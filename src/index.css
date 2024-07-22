@@ -1,0 +1,16 @@
+:root {
+  --background: white;
+
+  --button-hover: lightgray;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto, Helvetica,
+    Arial, sans-serif;
+  margin: 0px;
+  font-size: 14px;
+}
