@@ -30,16 +30,21 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import App from './App.vue';
 import { OpenDialogOptions } from 'electron'
-import { setFileViewerCallback } from './main/FilePickers';
+import { setOpenFileCallback, setPlatform, setSaveFileCallback } from './main/PlatformContext';
 
-//const store = createPinia();
-console.log(window.electronAPI);
+const store = createPinia();
+//console.log(window.electronAPI);
 const params: OpenDialogOptions = {}
 //window.electronAPI.ipc.invoke("showOpenFileDialog", params);
 //console.log(window.electronAPI.openFile(params));
 
-setFileViewerCallback(window.electronAPI.openFile)
+setOpenFileCallback(window.electronAPI.openFile);
+setSaveFileCallback(window.electronAPI.saveFile);
+
+window.electronAPI.platform.then((platform: string) => {
+    setPlatform(platform);
+});
 
 createApp(App)
-    //.use(store)
+    .use(store)
     .mount('#app');

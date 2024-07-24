@@ -2,7 +2,7 @@
   "name": "bo-save-editor",
   "productName": "bo-save-editor",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Save editor for Bo, Path of the Teal Lotus",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",

@@ -1,25 +1,15 @@
 <script setup lang="ts">
-import { onBeforeMount, onMounted } from 'vue';
 import MenuBar from './components/MenuBar.vue';
-import { OpenDialogOptions } from 'electron';
-import { getFileViewerCallback } from './main/FilePickers';
-
-onMounted(async () => {
-    const params: OpenDialogOptions = {
-        title: "amongus"
-    };
-
-    const cb = getFileViewerCallback();
-    const ret = cb(params);
-    console.log(ret);
-})
+import BottomBar from './components/BottomBar.vue';
+import EditingPane from './components/EditingPane.vue';
 </script>
 
 <template>
     <MenuBar></MenuBar>
-    AAAA
+    <EditingPane></EditingPane>
+    <BottomBar></BottomBar>
 </template>
 
 <style>
-@import "./index.css"
+@import "./index.css";
 </style>

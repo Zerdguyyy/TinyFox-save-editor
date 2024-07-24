@@ -1,17 +1,21 @@
-import { app, BrowserWindow, dialog, ipcMain } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain, SaveDialogOptions } from 'electron';
 import path from 'path';
 import fs from 'fs';
+import os from 'os';
+import { VERSION } from './types/constants';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
+let mainWindow: BrowserWindow;
+
 const createWindow = () => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+  mainWindow = new BrowserWindow({
+    width: 1200,
+    height: 900,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
@@ -34,22 +38,58 @@ const createWindow = () => {
 });
 };
 
+// TODO - currently unable to track if the file is saved
+function setTitle(saved: boolean = true, filepath: string = null) {
+  let title = "BoPOTTLo Save Editor V" + VERSION;
+  if (filepath != null) {
+    title += " - ";
+    if (!saved) {
+      title += "*";
+    }
+    title += filepath;
+  }
+  mainWindow.setTitle(title);
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   createWindow();
 
+  // TODO - allow different file encodings?
   ipcMain.handle('showOpenFileDialog', async (event, params) => {
     const filePickerResult = await dialog.showOpenDialog(params);
     if (filePickerResult.filePaths[0] != undefined) {
-      const data = fs.readFileSync(filePickerResult.filePaths[0], { encoding: 'utf-8', flag: 'r' });
-      console.log("glort");
-      console.log(data);
-      return data;
+      try {
+        const data = fs.readFileSync(filePickerResult.filePaths[0], { encoding: 'utf-8', flag: 'r' });
+        setTitle(true, filePickerResult.filePaths[0]);
+        return { data: data, filepath: filePickerResult.filePaths[0] };
+      } catch (err) {
+        console.error(err);
+        return null; // TODO - user-side error reporting
+      }
     }
-    return undefined;
-  })
+    return null;
+  });
+  
+  ipcMain.handle('showSaveFileDialog', async (event, params: { data: string, options: SaveDialogOptions}) => {
+    const filePickerResult = await dialog.showSaveDialog(params.options);
+    if (filePickerResult.filePath != undefined) {
+      try {
+        fs.writeFileSync(filePickerResult.filePath, params.data, { encoding: 'utf-8' });
+        setTitle(true, filePickerResult.filePath);
+        return filePickerResult.filePath;
+      } catch (err) {
+        console.error(err); // TODO - user-side error reporting
+      }
+    }
+    return null;
+  });
+
+  ipcMain.handle('getOS', () => {
+    return os.platform();
+  });
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -68,6 +108,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
