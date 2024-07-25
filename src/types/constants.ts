@@ -53,9 +53,9 @@ export const INVENTORY_LINKS = [
     1 - unknown
     3 - unknown, resets to false when game is closed
     9 - unknown
-    11 - mirror
-    12 - the sword
-    13 - the jewel
+    11 - used
+    12 - used
+    13 - used
     21 - unknown
     24 - unknown
 */
@@ -68,8 +68,6 @@ export const INVENTORY_BOOLS = [
     { boolIndex: 8, name: "Kodama Charcoal"},
     { boolIndex: 10, name: "Usagi Scroll"},
     { boolIndex: 14, name: "Kitsune Kifuda"},
-    //{ boolIndex: 21, name: "Unknown"},
-    //{ boolIndex: 24, name: "Unknown"},
 ]
 
 export const DARUMA_NAMES = [ 
@@ -119,14 +117,21 @@ export const OMAMORI_NAMES = [
 ]
 
 export const SHRINE_PRESETS = [
+    {name:"Bamboo Forest first shrine",camera:"VC Main",position:[218.02993774414062,6.617244243621826],scene:"CBF Intro"},
     {name:"Armapillo bossfight room",camera:'VC Boss Camera',position: [513.85546875, -2.2900390625],scene:'UC Boss'},
+    {name:"Sencho Bridge entrance",camera:"VC Rozu Dash ",position:[605.66650390625,-56.73704147338867],scene:"Coast 1"},
+    {name:"Sakura City entrance",camera:"VC Main",position:[524.791259765625,-56.274173736572266],scene:"Coast 2"},
     {name:"Megumi Mountain entrance",camera:'VC Main',position: [-6.615234375, -4.1917266845703125],scene:'MM Base'},
     {name:"Yokozuna bossfight",camera:'VC intamateEntrance',position: [606.8997802734375, 36.348411560058594],scene: 'MM Yokuzuna Boss'},
-    {name:"Sakura City Entrance",camera:"VC Main",position:[524.791259765625,-56.274173736572266],scene:"Coast 2"},
-    {name:"Shogun bossfight",camera:"VC Main",position:[-344.9992980957031,776.9672241210938],scene:"IMC Final Ascent"},
-    {name:"Sencho Bridge entrance",camera:"VC Rozu Dash ",position:[605.66650390625,-56.73704147338867],scene:"Coast 1"},
-    {name:"Castle elevator middle floor",camera:"VC elevator ",position:[9.3607177734375,241.7854461669922],scene:"IMC Floor 2"},
-    {name:"Castle elevator bottom floor",camera:"VC ElevatorStart ",position:[4.1605224609375,599.1856079101562],scene:"IMC Floor 3"},
-    {name:"Castle entrance",camera:"VC Main",position:[-128.3321533203125,-206.6874542236328],scene:"IMC Entrance"},
+    {name:"Ice Caves center",camera:"VC Main",position:[-51.65618896484375,-1012.6632080078125],scene:"IC Central"},
     {name:"Dai Tengu bossfight",camera:"VC Main",position:[-332.68304443359375,-12.358484268188477],scene:"IC Dai Tengu"},
+    {name:"Midori Forest entrance",camera:"VC MFEntrance",position:[-154.6584930419922,-5.6536865234375],scene:"MF Asahi"},
+    {name:"Midori Forest fox wedding",camera:"VC Shrine",position:[-234.51593017578125,79.98797607421875],scene:"MF Shrine Ceremony"},
+    {name:"Kitsura bossfight",camera:"VC preBossRoom ",position:[-234.68194580078125,147.75189208984375],scene:"MF Shrine Ceremony"},
+    {name:"Kitsune Burrows mochi table",camera:"VC Main",position:[25.006256103515625,-252.9212188720703],scene:"KB Entrance"},
+    {name:"Jorogumo bossfight",camera:"VC Main",position:[255.5587921142578,-472.25018310546875],scene:"KB South"},
+    {name:"Castle entrance",camera:"VC Main",position:[-128.3321533203125,-206.6874542236328],scene:"IMC Entrance"},
+    {name:"Castle elevator bottom floor",camera:"VC ElevatorStart ",position:[4.1605224609375,599.1856079101562],scene:"IMC Floor 3"},
+    {name:"Castle elevator middle floor",camera:"VC elevator ",position:[9.3607177734375,241.7854461669922],scene:"IMC Floor 2"},
+    {name:"Shogun bossfight",camera:"VC Main",position:[-344.9992980957031,776.9672241210938],scene:"IMC Final Ascent"},
 ] as SHRINE_LOCATION[];

@@ -1,4 +1,5 @@
 import { app, BrowserWindow, dialog, ipcMain, SaveDialogOptions } from 'electron';
+import { optimizer } from '@electron-toolkit/utils';
 import path from 'path';
 import fs from 'fs';
 import os from 'os';
@@ -29,13 +30,6 @@ const createWindow = () => {
   }
 
   mainWindow.removeMenu();
-  mainWindow.webContents.on('before-input-event', (_, input) => {
-    if (input.type === 'keyDown' && input.key === 'F12') {
-      mainWindow.webContents.isDevToolsOpened()
-        ? mainWindow.webContents.closeDevTools()
-        : mainWindow.webContents.openDevTools({ mode: 'right' });
-    }
-});
 };
 
 // TODO - currently unable to track if the file is saved
@@ -90,6 +84,10 @@ app.on('ready', () => {
   ipcMain.handle('getOS', () => {
     return os.platform();
   });
+});
+
+app.on('browser-window-created', (_, window) => {
+  optimizer.watchWindowShortcuts(window);
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
