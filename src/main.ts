@@ -30,11 +30,15 @@ const createWindow = () => {
   }
 
   mainWindow.removeMenu();
+
+  mainWindow.on('ready-to-show', () => {
+    setTitle();
+  });
 };
 
 // TODO - currently unable to track if the file is saved
 function setTitle(saved: boolean = true, filepath: string = null) {
-  let title = "BoPOTTLo Save Editor V" + VERSION;
+  let title = "TinyFox Save Editor V" + VERSION;
   if (filepath != null) {
     title += " - ";
     if (!saved) {
