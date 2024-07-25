@@ -1,6 +1,6 @@
 {
-  "name": "bo-save-editor",
-  "productName": "bo-save-editor",
+  "name": "tinyfox-editor",
+  "productName": "tinyfox-editor",
   "version": "1.0.0",
   "description": "Save editor for Bo, Path of the Teal Lotus",
   "main": ".vite/build/main.js",
